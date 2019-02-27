@@ -14,23 +14,6 @@ def pairwise(iterable):
     next(b, None)
     return izip(a, b)
 
-def stubxml():
-  root = ET.Element('gexf')
-  root.set('xmlns', 'http://www.gexf.net/1.2draft')
-  root.set('version', '1.2')
-  meta = ET.SubElement(root, "meta")
-  meta.set('lastmodifieddate', '2009-03-20')
-  creator = ET.SubElement(meta, "creator")
-  creator.text = "CMAND"
-  descr  = ET.SubElement(meta, "description")
-  descr.text = "brite2gexf"
-  graph = ET.SubElement(root, "graph")
-  graph.set('mode', 'static')
-  graph.set('defaultedgetype', 'directed')
-  nodes = ET.SubElement(graph, "nodes")
-  edges = ET.SubElement(graph, "edges")
-  return root, nodes, edges
-
 def readMRT(infile, G, n=0, verbose=False):
   d = Reader(sys.argv[1])
   while True: 
