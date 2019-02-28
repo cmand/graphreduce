@@ -6,7 +6,13 @@
 import networkx as nx
 from mrtparse import *
 import sys
-from itertools import tee, izip
+from itertools import tee
+try:
+  # Python 2
+  from itertools import izip
+except ImportError:
+  # Python 3
+  izip = zip
 
 def pairwise(iterable):
     "s -> (s0,s1), (s1,s2), (s2, s3), ..."
@@ -31,7 +37,7 @@ def readMRT(infile, G, n=0, verbose=False):
           aspath = attr.as_path[0]['val']
           for u, v in pairwise(aspath):
             (u,v) = (int(u), int(v))
-            if verbose: print "%d -> %d" % (u,v)
+            if verbose: print("%d -> %d" % (u,v))
             G.add_node(u)
             G.add_node(v)
             G.add_edge(u, v)
@@ -39,12 +45,12 @@ def readMRT(infile, G, n=0, verbose=False):
 
 if __name__ == "__main__":
   if len(sys.argv) != 2:
-    print "Usage: %s <MRT input>" % sys.argv[0]
+    print("Usage: %s <MRT input>" % sys.argv[0])
     sys.exit(0)
 
   G = nx.Graph()
   readMRT(sys.argv[1], G) 
   #print "Stats: %d nodes %d edges" % (G.number_of_nodes(), G.number_of_edges())
   for l in nx.generate_gexf(G) :
-    print l
+    print(l)
   sys.exit(0)

@@ -43,9 +43,9 @@ def readbrite(infile, nodes, edges):
 
 if __name__ == "__main__":
   if len(sys.argv) != 2:
-    print "Usage: %s <BRITE input>" % sys.argv[0]
+    print("Usage: %s <BRITE input>" % sys.argv[0])
     sys.exit(0)
 
   (root, nodes, edges) = stubxml()
   readbrite(sys.argv[1], nodes, edges)
-  print ET.tostring(root)
+  ET.dump(root)
